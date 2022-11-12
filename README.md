@@ -1,21 +1,19 @@
 # LivebookFormatter
 
-**TODO: Add description**
-
+A formatter for .livemd files.
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `livebook_formatter` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:livebook_formatter, "~> 0.1.0"}
+    {:livebook_formatter, "~> 0.1.0", only: :dev, runtime: false}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/livebook_formatter>.
+## Usage
 
+[HexDocs Documentation](https://hexdocs.pm/livebook_formatter)
+
+You may either use the provided `LivebookFormatter.reformat/1` function to format the contents of a `.livemd` file,
+or you can use the `mix format_livebooks` task which automatically formats all `.livemd` files within the current mix project.
