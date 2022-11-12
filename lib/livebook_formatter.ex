@@ -15,14 +15,8 @@ defmodule LivebookFormatter do
     |> markdown_to_block_ast()
     |> elem(1)
     |> markdown_from_ast()
-  end
-
-  @doc """
-  Wraps `EarmarkParser.as_ast/2`.
-  """
-  @spec markdown_to_ast(String.t()) :: {:ok | :error, EarmarkParser.ast(), list()}
-  def markdown_to_ast(markdown) do
-    EarmarkParser.as_ast(markdown)
+    # Livebook Editor adds a new line.
+    |> Kernel.<>("\n")
   end
 
   @doc """
@@ -35,19 +29,6 @@ defmodule LivebookFormatter do
   def markdown_to_block_ast(markdown) do
     EarmarkParser.as_ast(markdown, parse_inline: false)
   end
-
-  @doc """
-  Extracts plain text from the given AST ignoring all the tags.
-  """
-  @spec text_from_ast(EarmarkParser.ast()) :: String.t()
-  def text_from_ast(ast)
-
-  def text_from_ast(ast) when is_list(ast) do
-    Enum.map_join(ast, &text_from_ast/1)
-  end
-
-  def text_from_ast(ast) when is_binary(ast), do: ast
-  def text_from_ast({_, _, ast, _}), do: text_from_ast(ast)
 
   @doc """
   Determines suitable Markdown fence delimiter for the

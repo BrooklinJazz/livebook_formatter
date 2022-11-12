@@ -16,7 +16,8 @@ defmodule LivebookFormatterTest do
       ```
     """
 
-    expected = Livebook.LiveMarkdown.MarkdownHelpers.reformat(content)
+    # livebook automatically adds a new line when opened in the Livebook Application.
+    expected = Livebook.LiveMarkdown.MarkdownHelpers.reformat(content) <> "\n"
     actual = LivebookFormatter.reformat(content)
     assert actual == expected
   end
