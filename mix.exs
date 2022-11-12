@@ -31,8 +31,8 @@ defmodule LivebookFormatter.MixProject do
 
   defp package() do
     [
-      licenses: ["Apache-2.0"],
-      links: %{"GitHub" => "https://github.com/brooklinjazz/livebook_formatter"}
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/BrooklinJazz/livebook_formatter"}
     ]
   end
 end
