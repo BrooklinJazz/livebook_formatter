@@ -6,12 +6,8 @@ defmodule Mix.Tasks.FormatLivebooks do
   use Mix.Task
 
   def run(_) do
-    IO.inspect("STARTING LIVEBOOK FORMATTER")
-
     get_nested_livebooks()
     |> Enum.map(fn livemd ->
-      IO.inspect(livemd, label: "Formatting")
-
       formatted_content =
         File.read!(livemd)
         |> LivebookFormatter.reformat()
@@ -22,8 +18,6 @@ defmodule Mix.Tasks.FormatLivebooks do
 
   @spec get_nested_livebooks(String.t()) :: [String.t()]
   defp get_nested_livebooks(path \\ "./") do
-    IO.inspect(path)
-
     File.ls!(path)
     |> Kernel.--(@ignored_folders)
     |> Enum.map(fn file_or_dir ->
