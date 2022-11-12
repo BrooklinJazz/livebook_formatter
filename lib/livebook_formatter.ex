@@ -26,7 +26,7 @@ defmodule LivebookFormatter do
   content is kept as is.
   """
   @spec markdown_to_block_ast(String.t()) :: {:ok | :error, EarmarkParser.ast(), list()}
-  def markdown_to_block_ast(markdown) do
+  defp markdown_to_block_ast(markdown) do
     EarmarkParser.as_ast(markdown, parse_inline: false)
   end
 
@@ -35,7 +35,7 @@ defmodule LivebookFormatter do
   given code.
   """
   @spec code_block_delimiter(String.t()) :: String.t()
-  def code_block_delimiter(code) do
+  defp code_block_delimiter(code) do
     max_streak =
       Regex.scan(~r/`{3,}/, code)
       |> Enum.map(fn [string] -> byte_size(string) end)
@@ -51,13 +51,13 @@ defmodule LivebookFormatter do
   comments removes trailing/leading blank newlines.
   """
   @spec normalize_comment_lines(list(String.t())) :: list(String.t())
-  def normalize_comment_lines(lines)
+  defp normalize_comment_lines(lines)
 
-  def normalize_comment_lines([line]) do
+  defp normalize_comment_lines([line]) do
     [String.trim(line)]
   end
 
-  def normalize_comment_lines(lines) do
+  defp normalize_comment_lines(lines) do
     lines
     |> Enum.drop_while(&blank?/1)
     |> Enum.reverse()
@@ -69,7 +69,7 @@ defmodule LivebookFormatter do
   Renders Markdown string from the given `EarmarkParser` AST.
   """
   @spec markdown_from_ast(EarmarkParser.ast()) :: String.t()
-  def markdown_from_ast(ast) do
+  defp markdown_from_ast(ast) do
     build_md([], ast)
     |> IO.iodata_to_binary()
     |> String.trim()
